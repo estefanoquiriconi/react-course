@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactDom from "react-dom/client";
 import { Posts } from "./Posts";
 
@@ -9,24 +9,25 @@ function Counter() {
 
   const [ msg, setMsg ] = useState('');
 
+  useEffect(() => {
+    console.log('render');
+  }, [counter])
+
   return (
     <div>
-      <h1>Counter: {counter} </h1>
-
-      <button onClick={() => setCounter(counter + 1)}>Sumar</button>
-
-      <button onClick={() => setCounter(counter - 1)}>Restar</button>
-
-      <button onClick={() => setCounter(1000)}>Restar</button>
-
-      <br/>
-      <br/>
-      <br/>
-
       <input onChange={e => setMsg(e.target.value)} />
       <button onClick={() => {
         alert('El mensaje es: ' + msg)
       }}>Guardar</button>
+
+      <hr></hr>
+
+      <h1>Counter: {counter} </h1>
+      <button onClick={()=> {
+        setCounter(counter + 1)
+      }}>
+        Incrementar
+      </button>
     </div>
   );
 }
